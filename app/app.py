@@ -1,11 +1,3 @@
-# =============================================================================
-# app.py — Backend Flask untuk Prediksi Penduduk Miskin Jawa Barat
-# =============================================================================
-# Endpoint:
-#   GET  /         → Render halaman utama (form input)
-#   POST /predict  → Menerima input JSON, return hasil prediksi
-# =============================================================================
-
 from flask import Flask, render_template, request, jsonify
 import numpy as np
 import pandas as pd
@@ -14,19 +6,13 @@ import os
 
 app = Flask(__name__)
 
-# ---------------------------------------------------------------------------
 # Load model dan kolom training
-# ---------------------------------------------------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ML_DIR = os.path.join(BASE_DIR, '..', 'ml')
 
 model = joblib.load(os.path.join(ML_DIR, 'model_rfr.pkl'))
 model_columns = joblib.load(os.path.join(ML_DIR, 'model_columns.pkl'))
 
-# ---------------------------------------------------------------------------
-# Threshold klasifikasi kemiskinan (HARDCODED dari output pd.cut di notebook)
-# Nilai bins aktual dari pd.cut(bins=3) terhadap kolom Prediksi_Miskin
-# ---------------------------------------------------------------------------
 BINS = [13.09, 145.48, 277.47, 409.47]  # Dari pd.cut(bins=3) dataset aktual
 
 
@@ -40,9 +26,7 @@ def klasifikasi(nilai):
         return 'Tinggi'
 
 
-# ---------------------------------------------------------------------------
 # Routes
-# ---------------------------------------------------------------------------
 @app.route('/')
 def index():
     """Render halaman utama dengan form prediksi."""
@@ -100,8 +84,5 @@ def predict():
         return jsonify({'error': str(e)}), 400
 
 
-# ---------------------------------------------------------------------------
-# Run
-# ---------------------------------------------------------------------------
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
