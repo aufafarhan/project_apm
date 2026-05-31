@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Hide error, set loading state
         errorAlert.style.display = 'none';
-        const originalBtnText = btnPredict.innerHTML;
         btnPredict.innerHTML = '<span class="loading loading-spinner loading-sm"></span> Memproses...';
         btnPredict.disabled = true;
 
@@ -67,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMessage.textContent = error.message;
             errorAlert.style.display = 'flex';
         } finally {
-            btnPredict.innerHTML = originalBtnText;
+            btnPredict.innerHTML = '<i class="fas fa-search mr-2"></i> Prediksi Sekarang';
             btnPredict.disabled = false;
         }
     });
@@ -229,11 +228,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         historyTable.innerHTML = history.map((h, i) => `
             <tr class="hover:bg-white/5 border-b border-white/5 transition-colors">
-                <td class="font-mono text-xs text-white/50">${h.waktu}</td>
-                <td class="font-semibold text-white">${h.wilayah}</td>
-                <td class="text-white/70">${h.tahun}</td>
-                <td class="font-bold text-[#ff6fd8]">${h.prediksi.toLocaleString('id-ID')}</td>
-                <td>
+                <td class="py-3 px-4 font-mono text-xs text-white/50">${h.waktu}</td>
+                <td class="px-4 font-semibold text-white">${h.wilayah}</td>
+                <td class="px-4 text-center text-white/70">${h.tahun}</td>
+                <td class="px-4 text-right font-bold text-[#ff6fd8]">${h.prediksi.toLocaleString('id-ID')}</td>
+                <td class="px-4 text-center">
                     <span class="badge badge-sm border-none ${
                         h.kategori === 'Rendah' ? 'bg-success text-success-content' : 
                         h.kategori === 'Sedang' ? 'bg-warning text-warning-content' : 
