@@ -155,10 +155,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function renderChart(data) {
-        const ctx = document.getElementById('comparisonChart').getContext('2d');
-        if (comparisonChart) comparisonChart.destroy();
+        const canvas = document.getElementById('comparisonChart');
+        
+        // Destroy existing chart using Chart.js built-in getChart method
+        let existingChart = Chart.getChart(canvas);
+        if (existingChart) {
+            existingChart.destroy();
+        }
 
-        comparisonChart = new Chart(ctx, {
+        comparisonChart = new Chart(canvas, {
             type: 'bar',
             data: {
                 labels: ['IPM', 'RLS', 'TPT', 'PDRB'],
