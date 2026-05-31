@@ -235,7 +235,6 @@
 </head>
 <body class="min-h-screen">
 
-    <!-- ░░ LIQUID BACKGROUND LAYER ░░ -->
     <div class="liquid-stage" aria-hidden="true">
         <div class="blob blob--1"></div>
         <div class="blob blob--2"></div>
@@ -244,48 +243,184 @@
     </div>
 
     <!-- NAVBAR -->
-    <nav class="navbar bg-white/5 backdrop-blur-md border-b border-white/10 sticky top-0 z-50 shadow-lg transition-all duration-300">
+    <nav class="navbar bg-white/5 backdrop-blur-md border-b border-white/10 sticky top-0 z-50 shadow-lg transition-all duration-300 w-full">
         <div class="container mx-auto">
             <div class="flex-1">
-                <a class="text-xl font-bold text-primary tracking-wide hover:scale-105 transition-all" href="/">
-                    <i class="fas fa-chart-line mr-2"></i>JabarPredicts
+                <a class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-cyan-400 tracking-wide hover:scale-105 transition-all" href="#beranda">
+                    <i class="fas fa-chart-line mr-2 text-[#00d2ff]"></i>JabarPredicts
                 </a>
             </div>
-            <div class="flex-none gap-2">
-                <a href="#form-prediksi" class="btn glass-btn-primary btn-sm">
-                    <i class="fas fa-calculator mr-1"></i> Mulai Prediksi
-                </a>
+            
+            <!-- Desktop Menu -->
+            <div class="flex-none hidden md:flex">
+                <ul class="menu menu-horizontal px-1 gap-1 font-medium text-white/80">
+                    <li><a href="#beranda" class="hover:bg-white/10 hover:text-white rounded-lg transition-colors">Beranda</a></li>
+                    <li><a href="#prediksi" class="hover:bg-white/10 hover:text-white rounded-lg transition-colors">Prediksi</a></li>
+                    <li><a href="#dashboard" class="hover:bg-white/10 hover:text-white rounded-lg transition-colors">Dashboard</a></li>
+                    <li><a href="#tentang-kami" class="hover:bg-white/10 hover:text-white rounded-lg transition-colors">Tentang Kami</a></li>
+                </ul>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="flex-none md:hidden">
+                <div class="dropdown dropdown-end">
+                    <label tabindex="0" class="btn btn-ghost btn-circle text-white">
+                        <i class="fas fa-bars text-xl"></i>
+                    </label>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-2xl bg-[#0a0015]/95 backdrop-blur-xl border border-white/10 rounded-box w-52 text-white/80">
+                        <li><a href="#beranda" class="hover:bg-white/10 hover:text-white"><i class="fas fa-home mr-2 w-4"></i> Beranda</a></li>
+                        <li><a href="#prediksi" class="hover:bg-white/10 hover:text-white"><i class="fas fa-calculator mr-2 w-4"></i> Prediksi</a></li>
+                        <li><a href="#dashboard" class="hover:bg-white/10 hover:text-white"><i class="fas fa-chart-pie mr-2 w-4"></i> Dashboard</a></li>
+                        <li><a href="#tentang-kami" class="hover:bg-white/10 hover:text-white"><i class="fas fa-users mr-2 w-4"></i> Tentang Kami</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- BERANDA -->
-    <section class="hero min-h-[70vh] bg-transparent" data-aos="fade-up">
-        <div class="hero-content text-center">
-            <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight text-white">
-                    Prediksi Jumlah <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">Penduduk Miskin</span><br>
-                    Kabupaten/Kota di <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Jawa Barat</span>
-                </h1>
-                <p class="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
-                    Menggunakan model <strong>Random Forest Regressor</strong> dengan
-                    <strong>R² Score 81.61%</strong> berdasarkan indikator makro pembangunan
-                    dari BPS (2018–2024).
-                </p>
-                <div class="flex flex-wrap justify-center gap-4 mb-8">
-                    <div class="badge bg-white/10 border-white/10 text-white gap-2">
-                        <i class="fas fa-database text-[#ff6fd8]"></i> 27 Kab/Kota
+    <section id="beranda" class="min-h-[85vh] flex items-center bg-transparent scroll-mt-20 pt-12 pb-16" data-aos="fade-up">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- Left Column: Text & CTA -->
+                <div class="flex-1 text-center lg:text-left">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white">
+                        Prediksi Jumlah <br class="hidden lg:block">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">Penduduk Miskin</span><br>
+                        di <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Jawa Barat</span>
+                    </h1>
+                    <p class="text-lg text-white/70 mb-8 max-w-2xl mx-auto lg:mx-0">
+                        Aplikasi interaktif berbasis Machine Learning untuk memprediksi tingkat kemiskinan di 27 Kabupaten/Kota Provinsi Jawa Barat menggunakan indikator makro pembangunan ekonomi.
+                    </p>
+                    
+                    <!-- Quick Stats Badges -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
+                        <div class="badge bg-white/5 border-white/10 text-white gap-2 py-4 px-4 shadow-lg backdrop-blur-md">
+                            <i class="fas fa-map-marker-alt text-[#ff6fd8]"></i> 27 Kab/Kota
+                        </div>
+                        <div class="badge bg-white/5 border-white/10 text-white gap-2 py-4 px-4 shadow-lg backdrop-blur-md">
+                            <i class="fas fa-calendar-alt text-[#00d2ff]"></i> Data 2018–2024
+                        </div>
+                        <div class="badge bg-white/5 border-white/10 text-white gap-2 py-4 px-4 shadow-lg backdrop-blur-md">
+                            <i class="fas fa-bullseye text-[#a855f7]"></i> R² Score 81.61%
+                        </div>
+                        <div class="badge bg-white/5 border-white/10 text-white gap-2 py-4 px-4 shadow-lg backdrop-blur-md">
+                            <i class="fas fa-brain text-[#f5af19]"></i> Random Forest Regressor
+                        </div>
                     </div>
-                    <div class="badge bg-white/10 border-white/10 text-white gap-2">
-                        <i class="fas fa-calendar text-[#00d2ff]"></i> 2018 – 2024
-                    </div>
-                    <div class="badge bg-white/10 border-white/10 text-white gap-2">
-                        <i class="fas fa-brain text-[#f5af19]"></i> Random Forest
+                    
+                    <!-- Buttons -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                        <a href="#prediksi" class="btn glass-btn-primary btn-lg px-8">
+                            <i class="fas fa-calculator mr-2"></i> Mulai Prediksi
+                        </a>
+                        <a href="#dashboard" class="btn btn-outline border-white/30 text-white hover:bg-white/20 hover:border-white/50 btn-lg px-8 backdrop-blur-sm transition-all-smooth">
+                            <i class="fas fa-chart-pie mr-2"></i> Lihat Dashboard
+                        </a>
                     </div>
                 </div>
-                <a href="#form-prediksi" class="btn glass-btn-primary btn-lg px-8">
-                    <i class="fas fa-arrow-down mr-2"></i> Mulai Prediksi
-                </a>
+                
+                <!-- Right Column: Preview Card -->
+                <div class="flex-1 w-full max-w-md mx-auto lg:max-w-none lg:pl-10 relative" data-aos="zoom-in" data-aos-delay="200">
+                    <!-- Decorative glow behind card -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-pink-500/20 to-cyan-500/20 blur-3xl rounded-full transform -translate-y-4"></div>
+                    
+                    <div class="card glass-card shadow-2xl border border-white/20 relative z-10 overflow-hidden result-glow-tinggi">
+                        <div class="card-body p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-white"><i class="fas fa-map-marker-alt text-primary mr-2"></i>Bogor</h3>
+                                    <p class="text-xs text-white/50">Prediksi 2024 (Contoh)</p>
+                                </div>
+                                <div class="badge bg-red-500/20 text-red-300 border-red-500/30 font-bold px-3 py-3 shadow-[0_0_10px_rgba(239,68,68,0.2)]">Tinggi</div>
+                            </div>
+                            
+                            <div class="text-center py-4">
+                                <p class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">412.70</p>
+                                <p class="text-xs text-white/50 mt-1">ribu jiwa penduduk miskin</p>
+                            </div>
+                            
+                            <div class="divider border-white/10 my-2"></div>
+                            
+                            <div class="space-y-4 mt-2">
+                                <div>
+                                    <div class="flex justify-between text-xs text-white/70 mb-1.5">
+                                        <span>Indeks Pembangunan Manusia (IPM)</span>
+                                        <span class="font-bold text-info">72.5</span>
+                                    </div>
+                                    <progress class="progress progress-info w-full bg-white/10 h-2" value="72.5" max="100"></progress>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs text-white/70 mb-1.5">
+                                        <span>Rata-rata Lama Sekolah (RLS)</span>
+                                        <span class="font-bold text-success">8.5 thn</span>
+                                    </div>
+                                    <progress class="progress progress-success w-full bg-white/10 h-2" value="8.5" max="15"></progress>
+                                </div>
+                                <div class="flex justify-between gap-4 mt-4 pt-2">
+                                    <div class="bg-white/5 rounded-xl p-3 flex-1 text-center border border-white/10 shadow-inner">
+                                        <p class="text-[10px] text-white/50 uppercase tracking-wider mb-1">TPT</p>
+                                        <p class="text-sm font-bold text-warning">8.2%</p>
+                                    </div>
+                                    <div class="bg-white/5 rounded-xl p-3 flex-1 text-center border border-white/10 shadow-inner">
+                                        <p class="text-[10px] text-white/50 uppercase tracking-wider mb-1">PDRB</p>
+                                        <p class="text-sm font-bold text-[#ff6fd8]">5.04%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-shimmer" aria-hidden="true"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARA KERJA -->
+    <section class="py-16 bg-transparent relative" data-aos="fade-up" data-aos-delay="150">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">
+                <i class="fas fa-cogs text-primary mr-2"></i>Cara Kerja
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 relative">
+                <!-- Decorative connecting line for desktop -->
+                <div class="hidden md:block absolute top-[40px] left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-transparent via-white/20 to-transparent z-0"></div>
+                
+                <!-- Step 1 -->
+                <div class="card glass-card shadow-xl hover:-translate-y-2 transition-all-smooth relative z-10 border-white/10">
+                    <div class="card-body items-center text-center p-6">
+                        <div class="w-16 h-16 rounded-full bg-primary/20 text-primary flex items-center justify-center text-2xl font-bold mb-5 border border-primary/30 shadow-[0_0_15px_rgba(255,111,216,0.3)] backdrop-blur-md">
+                            1
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Masukkan Data Wilayah</h3>
+                        <p class="text-sm text-white/60">Pilih kabupaten/kota, tahun target, dan masukkan nilai 4 indikator makro ekonomi.</p>
+                    </div>
+                    <div class="glass-shimmer" aria-hidden="true"></div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="card glass-card shadow-xl hover:-translate-y-2 transition-all-smooth relative z-10 border-white/10">
+                    <div class="card-body items-center text-center p-6">
+                        <div class="w-16 h-16 rounded-full bg-[#00d2ff]/20 text-[#00d2ff] flex items-center justify-center text-2xl font-bold mb-5 border border-[#00d2ff]/30 shadow-[0_0_15px_rgba(0,210,255,0.3)] backdrop-blur-md">
+                            2
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Model Memproses Data</h3>
+                        <p class="text-sm text-white/60">Algoritma Random Forest Regressor menganalisis pola data dan melakukan perhitungan akurat.</p>
+                    </div>
+                    <div class="glass-shimmer" aria-hidden="true"></div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="card glass-card shadow-xl hover:-translate-y-2 transition-all-smooth relative z-10 border-white/10">
+                    <div class="card-body items-center text-center p-6">
+                        <div class="w-16 h-16 rounded-full bg-success/20 text-success flex items-center justify-center text-2xl font-bold mb-5 border border-success/30 shadow-[0_0_15px_rgba(34,197,94,0.3)] backdrop-blur-md">
+                            3
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Hasil & Interpretasi</h3>
+                        <p class="text-sm text-white/60">Lihat angka prediksi kemiskinan lengkap dengan kategori, penjelasan ringkas, dan visual grafik.</p>
+                    </div>
+                    <div class="glass-shimmer" aria-hidden="true"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -338,7 +473,7 @@
     </section>
 
     <!-- FORM PREDIKSI -->
-    <section id="form-prediksi" class="py-16 bg-transparent" data-aos="fade-up">
+    <section id="prediksi" class="py-16 bg-transparent scroll-mt-20" data-aos="fade-up">
         <div class="container mx-auto px-4 max-w-2xl">
             <h2 class="text-3xl font-bold text-center mb-2 text-white">
                 <i class="fas fa-calculator text-primary mr-2"></i>Form Prediksi
@@ -456,107 +591,224 @@
                             </button>
                         </div>
                     </form>
+
+                    <!-- Error Alert -->
+                    <div id="error-alert" class="alert alert-error shadow-lg mt-6" style="display: none;">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span id="error-message">Terjadi kesalahan saat melakukan prediksi.</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="glass-shimmer" aria-hidden="true"></div>
             </div>
         </div>
     </section>
 
-    <!-- HASIL PREDIKSI -->
-    <section id="result-section" class="py-16 bg-transparent" data-aos="fade-up">
-        <div class="container mx-auto px-4 max-w-5xl">
+    <!-- HASIL PREDIKSI (DASHBOARD) -->
+    <div id="dashboard" class="scroll-mt-20 w-full"></div>
+    <section id="dashboard-section" class="py-16 bg-transparent" data-aos="fade-up">
+        <div class="container mx-auto px-4 max-w-6xl">
             <h2 class="text-3xl font-bold text-center mb-8 text-white">
-                <i class="fas fa-poll text-primary mr-2"></i>Hasil Prediksi
+                <i class="fas fa-chart-pie text-primary mr-2"></i>Dashboard Analitis
             </h2>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-                <!-- Result Card -->
-                <div id="result-card" class="card glass-card shadow-2xl border transition-all-smooth">
-                    <div class="card-body relative z-10">
-                        <!-- Wilayah & Tahun -->
-                        <div class="text-center mb-4">
-                            <h3 class="text-2xl font-bold text-white" id="res-wilayah">—</h3>
-                            <p class="text-white/50">
-                                <i class="fas fa-calendar mr-1"></i> Tahun <span id="res-tahun">—</span>
-                            </p>
-                        </div>
-
-                        <div class="divider border-white/5"></div>
-
-                        <!-- Prediksi Angka -->
-                        <div class="text-center mb-4">
-                            <p class="text-sm text-white/60 mb-1">Prediksi Jumlah Penduduk Miskin</p>
-                            <p class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400" id="res-angka">—</p>
-                            <p class="text-sm text-white/50 mt-1">ribuan jiwa</p>
-                        </div>
-
-                        <!-- Badge Klasifikasi -->
-                        <div class="text-center mb-4">
-                            <div id="res-badge" class="badge badge-lg text-lg px-6 py-4 font-bold border-none text-white">—</div>
-                        </div>
-
-                        <div class="divider border-white/5"></div>
-
-                        <!-- Catatan Indikator Dominan -->
-                        <div class="alert bg-white/5 border border-white/10 shadow-md py-3 px-4 mb-4 text-white">
-                            <div class="flex items-start gap-2">
-                                <i class="fas fa-info-circle text-lg mt-0.5 text-info"></i>
-                                <div>
-                                    <h4 class="font-bold text-xs">Indikator Dominan</h4>
-                                    <p class="text-[11px] leading-relaxed text-white/70">
-                                        <strong>RLS</strong> (Rata-rata Lama Sekolah) dan <strong>IPM</strong> (Indeks Pembangunan Manusia) adalah fitur paling berpengaruh dalam model ini.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Analisis Kontribusi Indikator -->
-                        <div class="alert bg-white/5 border border-white/10 shadow-md p-4 text-white">
-                            <div class="flex items-start gap-3">
-                                <div class="p-2 bg-secondary/15 rounded-lg text-secondary flex items-center justify-center">
-                                    <i class="fas fa-brain text-lg"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-xs text-secondary uppercase tracking-wider mb-1">Analisis Kontribusi Indikator</h4>
-                                    <p class="text-[12px] leading-relaxed text-white/80" id="res-penjelasan">
-                                        —
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+            <!-- EMPTY STATE -->
+            <div id="empty-state" class="card glass-card shadow-lg border border-white/10 text-center py-16 transition-all-smooth">
+                <div class="card-body items-center relative z-10">
+                    <div class="text-6xl text-white/20 mb-6">
+                        <i class="fas fa-clipboard-list"></i>
                     </div>
-                    <div class="glass-shimmer" aria-hidden="true"></div>
+                    <h3 class="text-2xl font-bold text-white/70 mb-2">Belum ada hasil prediksi</h3>
+                    <p class="text-white/50 max-w-md mx-auto">Silakan pilih wilayah dan masukkan nilai indikator makro pada form di atas untuk melihat analisis lengkap di dashboard ini.</p>
                 </div>
-
-                <!-- Chart Card -->
-                <div id="chart-card" class="card glass-card shadow-2xl border transition-all-smooth">
-                    <div class="card-body flex flex-col justify-between relative z-10">
-                        <div>
-                            <h3 class="card-title text-xl font-bold mb-4 justify-center lg:justify-start text-white">
-                                <i class="fas fa-chart-bar text-secondary mr-2"></i>Perbandingan Indikator
-                            </h3>
-                            <p class="text-xs text-white/60 mb-6 text-center lg:text-left">
-                                Membandingkan nilai indikator wilayah pilihan Anda terhadap rata-rata regional Jawa Barat pada tahun tersebut.
-                            </p>
-                        </div>
-                        <div class="relative w-full flex-grow min-h-[300px] h-[300px]">
-                            <canvas id="comparisonChart"></canvas>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-white/10 flex flex-wrap gap-x-4 gap-y-2 justify-center lg:justify-start text-[11px] text-white/50">
-                            <span><i class="fas fa-square text-[#00d2ff] mr-1"></i> Input Wilayah</span>
-                            <span><i class="fas fa-square text-white/40 mr-1"></i> Rata-rata Jabar</span>
-                        </div>
-                    </div>
-                    <div class="glass-shimmer" aria-hidden="true"></div>
-                </div>
+                <div class="glass-shimmer" aria-hidden="true"></div>
             </div>
 
-            <!-- Error Alert -->
-            <div id="error-alert" class="alert alert-error shadow-lg mt-8" style="display: none;">
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <span id="error-message">Terjadi kesalahan saat melakukan prediksi.</span>
+            <!-- POPULATED STATE -->
+            <div id="populated-state" style="display: none;" class="space-y-8">
+                
+                <!-- SUMMARY CARDS -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="card glass-card border border-white/10 hover:-translate-y-1 transition-all-smooth">
+                        <div class="card-body p-5 relative z-10">
+                            <p class="text-xs text-white/50 uppercase tracking-wider mb-1"><i class="fas fa-map-marker-alt text-[#ff6fd8] mr-1"></i> Wilayah</p>
+                            <p class="text-2xl font-bold text-white truncate" id="sum-wilayah">—</p>
+                        </div>
+                        <div class="glass-shimmer" aria-hidden="true"></div>
+                    </div>
+                    <div class="card glass-card border border-white/10 hover:-translate-y-1 transition-all-smooth">
+                        <div class="card-body p-5 relative z-10">
+                            <p class="text-xs text-white/50 uppercase tracking-wider mb-1"><i class="fas fa-calendar-alt text-[#00d2ff] mr-1"></i> Tahun</p>
+                            <p class="text-2xl font-bold text-white" id="sum-tahun">—</p>
+                        </div>
+                        <div class="glass-shimmer" aria-hidden="true"></div>
+                    </div>
+                    <div class="card glass-card border border-white/10 hover:-translate-y-1 transition-all-smooth">
+                        <div class="card-body p-5 relative z-10">
+                            <p class="text-xs text-white/50 uppercase tracking-wider mb-1"><i class="fas fa-users text-[#a855f7] mr-1"></i> Penduduk Miskin</p>
+                            <p class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400"><span id="sum-angka">—</span></p>
+                            <p class="text-[10px] text-white/40 mt-1">ribuan jiwa</p>
+                        </div>
+                        <div class="glass-shimmer" aria-hidden="true"></div>
+                    </div>
+                    <div class="card glass-card border border-white/10 hover:-translate-y-1 transition-all-smooth">
+                        <div class="card-body p-5 relative z-10">
+                            <p class="text-xs text-white/50 uppercase tracking-wider mb-1"><i class="fas fa-tag text-[#f5af19] mr-1"></i> Kategori</p>
+                            <div class="mt-2"><span id="sum-badge" class="badge badge-lg font-bold px-4 py-3 border-none text-white">—</span></div>
+                        </div>
+                        <div class="glass-shimmer" aria-hidden="true"></div>
+                    </div>
                 </div>
+
+                <!-- MAIN GRID: CHART & INTERPRETASI -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Chart Section -->
+                    <div class="lg:col-span-2 card glass-card border border-white/10 flex flex-col">
+                        <div class="card-body relative z-10 flex flex-col flex-grow p-6">
+                            <h3 class="card-title text-lg font-bold text-white mb-2"><i class="fas fa-chart-bar text-[#00d2ff] mr-2"></i>Perbandingan vs Rata-rata Jabar</h3>
+                            <div class="relative w-full flex-grow min-h-[300px]">
+                                <canvas id="comparisonChart"></canvas>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-white/10 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-white/60 font-medium">
+                                <span><i class="fas fa-square text-[#00d2ff] mr-1"></i> Input Wilayah</span>
+                                <span><i class="fas fa-square text-white/40 mr-1"></i> Rata-rata Jabar</span>
+                            </div>
+                        </div>
+                        <div class="glass-shimmer" aria-hidden="true"></div>
+                    </div>
+
+                    <!-- Interpretasi Section -->
+                    <div class="card glass-card border border-white/10 flex flex-col">
+                        <div class="card-body relative z-10 flex flex-col p-6">
+                            <h3 class="card-title text-lg font-bold text-white mb-4"><i class="fas fa-brain text-[#a855f7] mr-2"></i>Interpretasi Model</h3>
+                            <div class="flex-grow overflow-y-auto pr-2 custom-scrollbar">
+                                <p class="text-sm leading-relaxed text-white/80" id="res-penjelasan">—</p>
+                            </div>
+                        </div>
+                        <div class="glass-shimmer" aria-hidden="true"></div>
+                    </div>
+                </div>
+
+                <!-- STATUS INDIKATOR & REKOMENDASI -->
+                <div class="card glass-card border border-white/10">
+                    <div class="card-body relative z-10 p-6">
+                        <h3 class="card-title text-lg font-bold text-white mb-6"><i class="fas fa-clipboard-check text-success mr-2"></i>Analisis Status Indikator</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                            <!-- IPM Status -->
+                            <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center shadow-inner relative overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white/5 z-0"></div>
+                                <div class="relative z-10">
+                                    <h4 class="text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">IPM</h4>
+                                    <p class="text-2xl font-bold text-white mb-1" id="stat-ipm-val">—</p>
+                                    <p class="text-[10px] text-white/40 mb-3 font-mono">Avg: <span id="stat-ipm-avg">—</span></p>
+                                    <div id="stat-ipm-badge" class="badge badge-sm py-2.5 px-3 font-bold w-full text-[10px]">—</div>
+                                </div>
+                            </div>
+                            <!-- RLS Status -->
+                            <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center shadow-inner relative overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white/5 z-0"></div>
+                                <div class="relative z-10">
+                                    <h4 class="text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">RLS</h4>
+                                    <p class="text-2xl font-bold text-white mb-1" id="stat-rls-val">—</p>
+                                    <p class="text-[10px] text-white/40 mb-3 font-mono">Avg: <span id="stat-rls-avg">—</span></p>
+                                    <div id="stat-rls-badge" class="badge badge-sm py-2.5 px-3 font-bold w-full text-[10px]">—</div>
+                                </div>
+                            </div>
+                            <!-- TPT Status -->
+                            <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center shadow-inner relative overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white/5 z-0"></div>
+                                <div class="relative z-10">
+                                    <h4 class="text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">TPT</h4>
+                                    <p class="text-2xl font-bold text-white mb-1" id="stat-tpt-val">—</p>
+                                    <p class="text-[10px] text-white/40 mb-3 font-mono">Avg: <span id="stat-tpt-avg">—</span></p>
+                                    <div id="stat-tpt-badge" class="badge badge-sm py-2.5 px-3 font-bold w-full text-[10px]">—</div>
+                                </div>
+                            </div>
+                            <!-- PDRB Status -->
+                            <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center shadow-inner relative overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white/5 z-0"></div>
+                                <div class="relative z-10">
+                                    <h4 class="text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">PDRB</h4>
+                                    <p class="text-2xl font-bold text-white mb-1" id="stat-pdrb-val">—</p>
+                                    <p class="text-[10px] text-white/40 mb-3 font-mono">Avg: <span id="stat-pdrb-avg">—</span></p>
+                                    <div id="stat-pdrb-badge" class="badge badge-sm py-2.5 px-3 font-bold w-full text-[10px]">—</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Recommendation Card -->
+                        <div id="rekomendasi-card" class="alert bg-[#1a0040]/80 border border-[#ff6fd8]/30 shadow-lg hidden transition-all-smooth">
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-lightbulb text-[#ff6fd8] text-xl mt-1 animate-pulse"></i>
+                                <div>
+                                    <h4 class="font-bold text-sm text-[#ff6fd8] mb-1" id="rekomendasi-title">Rekomendasi Prioritas</h4>
+                                    <p class="text-[13px] text-white/80 leading-relaxed" id="rekomendasi-text">—</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-shimmer" aria-hidden="true"></div>
+                </div>
+
+                <!-- RIWAYAT PREDIKSI -->
+                <div class="card glass-card border border-white/10 mt-8">
+                    <div class="card-body relative z-10 p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="card-title text-lg font-bold text-white"><i class="fas fa-history text-warning mr-2"></i>Riwayat Prediksi Terakhir</h3>
+                            <span class="text-[10px] text-white/40 bg-white/5 px-2 py-1 rounded">Tersimpan secara lokal</span>
+                        </div>
+                        <div class="overflow-x-auto rounded-xl border border-white/5 bg-white/5 shadow-inner">
+                            <table class="table table-sm w-full text-white/80">
+                                <thead class="text-white/60 bg-white/5 uppercase text-[10px] tracking-wider border-b border-white/10">
+                                    <tr>
+                                        <th class="py-3 px-4">Waktu</th>
+                                        <th class="px-4">Wilayah</th>
+                                        <th class="px-4 text-center">Tahun</th>
+                                        <th class="px-4 text-right">Prediksi (ribu)</th>
+                                        <th class="px-4 text-center">Kategori</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="history-tbody">
+                                    <!-- Dinamis via JS -->
+                                </tbody>
+                            </table>
+                            <div id="history-empty" class="text-center py-8 text-white/40 text-sm" style="display: none;">
+                                <i class="fas fa-inbox text-2xl mb-2 opacity-50 block"></i>
+                                Belum ada riwayat.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-shimmer" aria-hidden="true"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TENTANG KAMI -->
+    <section id="tentang-kami" class="py-16 bg-transparent scroll-mt-20" data-aos="fade-up">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl font-bold mb-8 text-white">
+                <i class="fas fa-users text-primary mr-2"></i>Tentang Kami
+            </h2>
+            <div class="card glass-card shadow-2xl border transition-all-smooth">
+                <div class="card-body relative z-10 p-8">
+                    <div class="text-4xl text-[#ff6fd8] mb-6"><i class="fas fa-laptop-code"></i></div>
+                    <p class="text-lg text-white/80 leading-relaxed mb-8">
+                        <strong>JabarPredicts</strong> adalah aplikasi web interaktif yang memprediksi jumlah penduduk miskin di tingkat Kabupaten/Kota Provinsi Jawa Barat. Aplikasi ini dibangun sebagai proyek akhir untuk mata kuliah <strong>Aplikasi Pembelajaran Mesin</strong>.
+                    </p>
+                    <div class="divider border-white/10 w-2/3 mx-auto"></div>
+                    <p class="text-sm font-semibold text-white/60 mb-4 mt-4 uppercase tracking-wider">Dikembangkan oleh Tim Mahasiswa Sistem Informasi Universitas Andalas:</p>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <div class="badge bg-white/5 border-white/20 text-white p-4 font-medium backdrop-blur-sm">Annisa Revalina H.</div>
+                        <div class="badge bg-white/5 border-white/20 text-white p-4 font-medium backdrop-blur-sm">Reva Hanum S.</div>
+                        <div class="badge bg-white/5 border-white/20 text-white p-4 font-medium backdrop-blur-sm">Farhan Aufa</div>
+                        <div class="badge bg-white/5 border-white/20 text-white p-4 font-medium backdrop-blur-sm">Nailah Khaira A.</div>
+                    </div>
+                </div>
+                <div class="glass-shimmer" aria-hidden="true"></div>
             </div>
         </div>
     </section>
@@ -586,6 +838,11 @@
             offset: 100
         });
 
+        // Tampilkan histori pada saat pertama dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHistory();
+        });
+
         // FORM SUBMIT — POST ke /predict
         document.getElementById('predict-form').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -601,10 +858,10 @@
             const payload = {
                 wilayah: document.getElementById('wilayah').value,
                 tahun:   document.getElementById('tahun').value,
-                ipm:     document.getElementById('ipm').value,
-                tpt:     document.getElementById('tpt').value,
-                pdrb:    document.getElementById('pdrb').value,
-                rls:     document.getElementById('rls').value
+                ipm:     parseFloat(document.getElementById('ipm').value),
+                tpt:     parseFloat(document.getElementById('tpt').value),
+                pdrb:    parseFloat(document.getElementById('pdrb').value),
+                rls:     parseFloat(document.getElementById('rls').value)
             };
 
             try {
@@ -629,75 +886,205 @@
             btn.disabled = false;
         });
 
-        // TAMPILKAN HASIL
         let chartInstance = null;
 
+        // TAMPILKAN HASIL DAN UPDATE DASHBOARD
         function showResult(data) {
-            const resultSection = document.getElementById('result-section');
-            resultSection.style.display = 'block';
+            // Ubah state dashboard
+            document.getElementById('empty-state').style.display = 'none';
+            const populatedState = document.getElementById('populated-state');
+            populatedState.style.display = 'block';
 
-            // Scroll ke hasil
-            resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Scroll ke dashboard
+            document.getElementById('dashboard-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            // Isi data
-            document.getElementById('res-wilayah').textContent = data.wilayah;
-            document.getElementById('res-tahun').textContent = data.tahun;
-            document.getElementById('res-angka').textContent = data.prediksi_penduduk_miskin.toLocaleString('id-ID', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
+            // 1. Isi Summary Cards
+            document.getElementById('sum-wilayah').textContent = data.wilayah;
+            document.getElementById('sum-tahun').textContent = data.tahun;
+            
+            const numVal = data.prediksi_penduduk_miskin;
+            document.getElementById('sum-angka').textContent = numVal.toLocaleString('id-ID', {
+                minimumFractionDigits: 2, maximumFractionDigits: 2
             });
 
-            // Badge klasifikasi
-            const badge = document.getElementById('res-badge');
-            const card = document.getElementById('result-card');
-            badge.textContent = data.klasifikasi;
+            // Badge Kategori
+            const sumBadge = document.getElementById('sum-badge');
+            sumBadge.textContent = data.klasifikasi;
+            sumBadge.className = 'badge badge-lg font-bold px-4 py-4 border-none text-white ';
+            
+            if (data.klasifikasi === 'Rendah') sumBadge.classList.add('bg-green-500/30', 'text-green-300');
+            else if (data.klasifikasi === 'Sedang') sumBadge.classList.add('bg-yellow-500/30', 'text-yellow-300');
+            else sumBadge.classList.add('bg-red-500/30', 'text-red-300');
 
-            // Reset classes
-            badge.className = 'badge badge-lg text-lg px-6 py-4 font-bold';
-            card.className = 'card glass-card shadow-2xl transition-all-smooth';
-
-            if (data.klasifikasi === 'Rendah') {
-                badge.classList.add('bg-green-500/20', 'text-green-400', 'border', 'border-green-500/30');
-                card.classList.add('result-glow-rendah');
-            } else if (data.klasifikasi === 'Sedang') {
-                badge.classList.add('bg-yellow-500/20', 'text-yellow-400', 'border', 'border-yellow-500/30');
-                card.classList.add('result-glow-sedang');
-            } else {
-                badge.classList.add('bg-red-500/20', 'text-red-400', 'border', 'border-red-500/30');
-                card.classList.add('result-glow-tinggi');
-            }
-
-            // Tampilkan penjelasan model
+            // 2. Isi Interpretasi
             document.getElementById('res-penjelasan').innerHTML = data.penjelasan_model;
 
-            // Tampilkan/update chart perbandingan
+            // 3. Kalkulasi Status Indikator
+            calculateStatus(data);
+
+            // 4. Update Chart
             updateChart(data);
+
+            // 5. Simpan riwayat & render ulang
+            saveToHistory(data);
+            renderHistory();
+        }
+
+        // LOGIKA STATUS INDIKATOR
+        function getStatus(indicator, input, avg) {
+            // Margin 2% dari rata-rata untuk mentoleransi nilai yang mendekati rata-rata
+            const margin = Math.abs(avg * 0.02); 
+            
+            if (indicator === 'TPT') {
+                // TPT lebih tinggi = buruk
+                if (input > avg + margin) return { label: 'Perlu Perhatian', color: 'bg-red-500/20 text-red-400 border-red-500/30' };
+                if (input < avg - margin) return { label: 'Lebih Baik', color: 'bg-green-500/20 text-green-400 border-green-500/30' };
+                return { label: 'Mendekati Rata-rata', color: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' };
+            } else {
+                // IPM, RLS, PDRB lebih rendah = buruk
+                if (input < avg - margin) return { label: 'Perlu Perhatian', color: 'bg-red-500/20 text-red-400 border-red-500/30' };
+                if (input > avg + margin) return { label: 'Lebih Baik', color: 'bg-green-500/20 text-green-400 border-green-500/30' };
+                return { label: 'Mendekati Rata-rata', color: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' };
+            }
+        }
+
+        function calculateStatus(data) {
+            const inputs = data.input_data;
+            const avgs = data.regional_average;
+
+            const indicators = [
+                { id: 'ipm', name: 'IPM', inp: inputs.ipm, avg: avgs.ipm },
+                { id: 'rls', name: 'RLS', inp: inputs.rls, avg: avgs.rls },
+                { id: 'tpt', name: 'TPT', inp: inputs.tpt, avg: avgs.tpt },
+                { id: 'pdrb', name: 'PDRB', inp: inputs.pdrb, avg: avgs.pdrb }
+            ];
+
+            let worstIndicator = null;
+            let worstGap = -Infinity; // Mencari persentase gap terburuk
+
+            indicators.forEach(ind => {
+                document.getElementById(`stat-${ind.id}-val`).textContent = ind.inp.toFixed(2) + (ind.name==='TPT'||ind.name==='PDRB'?'%':'');
+                document.getElementById(`stat-${ind.id}-avg`).textContent = ind.avg.toFixed(2) + (ind.name==='TPT'||ind.name==='PDRB'?'%':'');
+                
+                const status = getStatus(ind.name, ind.inp, ind.avg);
+                const badge = document.getElementById(`stat-${ind.id}-badge`);
+                badge.textContent = status.label;
+                badge.className = `badge badge-sm py-3 px-2 font-bold w-full border text-[10px] sm:text-xs ${status.color}`;
+
+                // Calculate relative gap to find the worst indicator for recommendation
+                let gapPercent = 0;
+                if (ind.name === 'TPT') {
+                    gapPercent = (ind.inp - ind.avg) / ind.avg; // TPT tinggi = positif secara numerik perhitungan gap
+                } else {
+                    gapPercent = (ind.avg - ind.inp) / ind.avg; // IPM rendah = positif secara numerik perhitungan gap
+                }
+
+                if (status.label === 'Perlu Perhatian' && gapPercent > worstGap) {
+                    worstGap = gapPercent;
+                    worstIndicator = ind;
+                }
+            });
+
+            // Tampilkan Rekomendasi
+            const recCard = document.getElementById('rekomendasi-card');
+            const recText = document.getElementById('rekomendasi-text');
+            const recTitle = document.getElementById('rekomendasi-title');
+            const recIcon = recCard.querySelector('i');
+            
+            recCard.classList.remove('hidden');
+
+            if (worstIndicator) {
+                // Ada masalah
+                recCard.className = 'alert bg-[#1a0040]/80 border border-[#ff6fd8]/30 shadow-lg transition-all-smooth';
+                recIcon.className = 'fas fa-lightbulb text-[#ff6fd8] text-xl mt-1 animate-pulse';
+                recTitle.className = 'font-bold text-sm text-[#ff6fd8] mb-1';
+                recTitle.textContent = 'Rekomendasi Prioritas';
+                
+                if (worstIndicator.name === 'TPT') {
+                    recText.innerHTML = `Tingkat Pengangguran Terbuka (TPT) berada <strong>di atas rata-rata regional</strong>. Sangat disarankan untuk memprioritaskan kebijakan pembukaan lapangan kerja baru, program padat karya, serta pelatihan vokasi guna menekan angka kemiskinan.`;
+                } else if (worstIndicator.name === 'IPM') {
+                    recText.innerHTML = `Indeks Pembangunan Manusia (IPM) masih <strong>tertinggal dari rata-rata provinsi</strong>. Prioritaskan alokasi anggaran daerah pada peningkatan kualitas dan aksesibilitas sektor pendidikan dan kesehatan dasar.`;
+                } else if (worstIndicator.name === 'RLS') {
+                    recText.innerHTML = `Rata-rata Lama Sekolah (RLS) tergolong <strong>rendah</strong>. Program wajib belajar, kejar paket, dan pemberian beasiswa daerah sangat direkomendasikan untuk meningkatkan kualitas SDM secara berkelanjutan.`;
+                } else if (worstIndicator.name === 'PDRB') {
+                    recText.innerHTML = `Laju Pertumbuhan Ekonomi (PDRB) melambat <strong>di bawah rata-rata Jawa Barat</strong>. Pemerintah daerah perlu mempertimbangkan pemberian insentif bagi UMKM lokal dan mengamankan investasi untuk menstimulasi perekonomian wilayah.`;
+                }
+            } else {
+                // Semua baik
+                recCard.className = 'alert bg-[#0a1f10]/80 border border-green-500/30 shadow-lg transition-all-smooth';
+                recIcon.className = 'fas fa-check-circle text-green-400 text-xl mt-1';
+                recTitle.className = 'font-bold text-sm text-green-400 mb-1';
+                recTitle.textContent = 'Kondisi Stabil';
+                recText.innerHTML = `Luar Biasa! Semua indikator makro terpantau <strong>lebih baik atau mendekati rata-rata provinsi</strong>. Langkah terbaik saat ini adalah mempertahankan stabilitas kebijakan ekonomi dan melanjutkan program yang sedang berjalan.`;
+            }
+        }
+
+        // HISTORY MANAGEMENT
+        function saveToHistory(data) {
+            let history = JSON.parse(localStorage.getItem('jabarPredictsHistory')) || [];
+            
+            const now = new Date();
+            const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')} (${now.getDate()}/${now.getMonth()+1})`;
+
+            const record = {
+                waktu: timeStr,
+                wilayah: data.wilayah,
+                tahun: data.tahun,
+                prediksi: data.prediksi_penduduk_miskin,
+                klasifikasi: data.klasifikasi
+            };
+
+            history.unshift(record); // Masukkan ke depan
+            if (history.length > 5) history.pop(); // Batasi max 5
+
+            localStorage.setItem('jabarPredictsHistory', JSON.stringify(history));
+        }
+
+        function renderHistory() {
+            const history = JSON.parse(localStorage.getItem('jabarPredictsHistory')) || [];
+            const tbody = document.getElementById('history-tbody');
+            const emptyMsg = document.getElementById('history-empty');
+
+            tbody.innerHTML = '';
+
+            if (history.length === 0) {
+                emptyMsg.style.display = 'block';
+                return;
+            }
+
+            emptyMsg.style.display = 'none';
+
+            history.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-white/5 hover:bg-white/5 transition-colors';
+                
+                let badgeClass = 'bg-white/10 text-white/80';
+                if (item.klasifikasi === 'Rendah') badgeClass = 'bg-green-500/20 text-green-400 border-green-500/30';
+                else if (item.klasifikasi === 'Sedang') badgeClass = 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
+                else if (item.klasifikasi === 'Tinggi') badgeClass = 'bg-red-500/20 text-red-400 border-red-500/30';
+
+                tr.innerHTML = `
+                    <td class="text-white/50 px-4">${item.waktu}</td>
+                    <td class="font-semibold text-white px-4">${item.wilayah}</td>
+                    <td class="text-center px-4">${item.tahun}</td>
+                    <td class="text-right font-mono text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400 font-bold px-4">${item.prediksi.toLocaleString('id-ID', {minimumFractionDigits:2, maximumFractionDigits:2})}</td>
+                    <td class="text-center px-4"><span class="badge badge-sm border ${badgeClass} font-semibold py-2.5">${item.klasifikasi}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
         }
 
         // FUNGSI UPDATE CHART
         function updateChart(data) {
             const ctx = document.getElementById('comparisonChart').getContext('2d');
             
-            // Hancurkan chart lama jika ada untuk mencegah canvas tumpang tindih
             if (chartInstance) {
                 chartInstance.destroy();
             }
 
-            const inputVals = [
-                data.input_data.ipm,
-                data.input_data.rls,
-                data.input_data.tpt,
-                data.input_data.pdrb
-            ];
-
-            const avgVals = [
-                data.regional_average.ipm,
-                data.regional_average.rls,
-                data.regional_average.tpt,
-                data.regional_average.pdrb
-            ];
-
-            const labels = ['IPM', 'RLS (Tahun)', 'TPT (%)', 'LPE PDRB (%)'];
+            const inputVals = [data.input_data.ipm, data.input_data.rls, data.input_data.tpt, data.input_data.pdrb];
+            const avgVals = [data.regional_average.ipm, data.regional_average.rls, data.regional_average.tpt, data.regional_average.pdrb];
+            const labels = ['IPM', 'RLS (Thn)', 'TPT (%)', 'PDRB (%)'];
 
             chartInstance = new Chart(ctx, {
                 type: 'bar',
@@ -714,7 +1101,7 @@
                             borderSkipped: false
                         },
                         {
-                            label: `Rata-rata Jabar (${data.tahun})`,
+                            label: `Rata-rata Jabar`,
                             data: avgVals,
                             backgroundColor: 'rgba(255, 255, 255, 0.15)',
                             borderColor: 'rgba(255, 255, 255, 0.4)',
@@ -728,71 +1115,18 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.08)'
-                            },
-                            ticks: {
-                                color: '#94a3b8',
-                                font: {
-                                    family: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif"
-                                }
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false
-                            },
-                            ticks: {
-                                color: '#94a3b8',
-                                font: {
-                                    family: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif"
-                                }
-                            }
-                        }
+                        y: { beginAtZero: true, grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8' } },
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
                     },
                     plugins: {
-                        legend: {
-                            display: false // Legend kustom dibuat secara manual di HTML
-                        },
+                        legend: { display: false },
                         tooltip: {
                             backgroundColor: '#1a0040',
                             titleColor: '#f8fafc',
                             bodyColor: '#cbd5e1',
                             borderColor: 'rgba(255, 255, 255, 0.15)',
                             borderWidth: 1,
-                            padding: 10,
-                            bodyFont: {
-                                family: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif"
-                            },
-                            titleFont: {
-                                family: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif",
-                                weight: 'bold'
-                            },
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed.y !== null) {
-                                        const val = context.parsed.y;
-                                        if (context.label.includes('IPM')) {
-                                            label += val.toFixed(2);
-                                        } else if (context.label.includes('RLS')) {
-                                            label += val.toFixed(2) + ' Tahun';
-                                        } else if (context.label.includes('TPT')) {
-                                            label += val.toFixed(2) + '%';
-                                        } else if (context.label.includes('PDRB')) {
-                                            label += val.toFixed(2) + '%';
-                                        } else {
-                                            label += val.toFixed(2);
-                                        }
-                                    }
-                                    return label;
-                                }
-                            }
+                            padding: 10
                         }
                     }
                 }
@@ -801,10 +1135,6 @@
 
         // TAMPILKAN ERROR
         function showError(message) {
-            const resultSection = document.getElementById('result-section');
-            resultSection.style.display = 'block';
-            resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
             document.getElementById('error-alert').style.display = 'flex';
             document.getElementById('error-message').textContent = message;
         }
