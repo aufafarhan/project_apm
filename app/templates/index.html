@@ -208,7 +208,7 @@
                                 </span>
                             </label>
                             <input type="number" id="tahun" class="input input-bordered w-full"
-                                   placeholder="Contoh: 2024" min="2018" max="2030" step="1" required>
+                                   placeholder="Contoh: 2024" min="2018" max="2035" step="1" required>
                         </div>
 
                         <!-- IPM & RLS -->
@@ -221,7 +221,7 @@
                                     <span class="label-text-alt">Indeks Pembangunan Manusia</span>
                                 </label>
                                 <input type="number" id="ipm" class="input input-bordered w-full"
-                                       placeholder="Contoh: 72.5" step="0.01" required>
+                                       placeholder="Contoh: 72.5" min="0" max="100" step="0.01" required>
                             </div>
                             <div class="form-control">
                                 <label class="label">
@@ -231,7 +231,7 @@
                                     <span class="label-text-alt">Rata-rata Lama Sekolah (tahun)</span>
                                 </label>
                                 <input type="number" id="rls" class="input input-bordered w-full"
-                                       placeholder="Contoh: 8.5" step="0.01" required>
+                                       placeholder="Contoh: 8.5" min="0" max="30" step="0.01" required>
                             </div>
                         </div>
 
@@ -245,17 +245,17 @@
                                     <span class="label-text-alt">Tingkat Pengangguran (%)</span>
                                 </label>
                                 <input type="number" id="tpt" class="input input-bordered w-full"
-                                       placeholder="Contoh: 8.2" step="0.01" required>
+                                       placeholder="Contoh: 8.2" min="0" max="100" step="0.01" required>
                             </div>
                             <div class="form-control">
                                 <label class="label">
                                     <span class="label-text font-semibold">
                                         <i class="fas fa-coins text-error mr-1"></i> PDRB
                                     </span>
-                                    <span class="label-text-alt">Produk Domestik Regional Bruto</span>
+                                    <span class="label-text-alt">Laju Pertumbuhan Ekonomi (%)</span>
                                 </label>
                                 <input type="number" id="pdrb" class="input input-bordered w-full"
-                                       placeholder="Contoh: 150000" step="0.01" required>
+                                       placeholder="Contoh: 5.04" min="-100" max="100" step="0.01" required>
                             </div>
                         </div>
 
@@ -273,57 +273,94 @@
 
     <!-- HASIL PREDIKSI -->
     <section id="result-section" class="py-16 bg-base-200" data-aos="fade-up">
-        <div class="container mx-auto px-4 max-w-2xl">
+        <div class="container mx-auto px-4 max-w-5xl">
             <h2 class="text-3xl font-bold text-center mb-8">
                 <i class="fas fa-poll text-primary mr-2"></i>Hasil Prediksi
             </h2>
 
-            <!-- Result Card -->
-            <div id="result-card" class="card bg-base-100 shadow-2xl border-2 border-base-content/10 transition-all-smooth">
-                <div class="card-body">
-                    <!-- Wilayah & Tahun -->
-                    <div class="text-center mb-4">
-                        <h3 class="text-2xl font-bold" id="res-wilayah">—</h3>
-                        <p class="text-base-content/50">
-                            <i class="fas fa-calendar mr-1"></i> Tahun <span id="res-tahun">—</span>
-                        </p>
-                    </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                <!-- Result Card -->
+                <div id="result-card" class="card bg-base-100 shadow-2xl border-2 border-base-content/10 transition-all-smooth">
+                    <div class="card-body">
+                        <!-- Wilayah & Tahun -->
+                        <div class="text-center mb-4">
+                            <h3 class="text-2xl font-bold" id="res-wilayah">—</h3>
+                            <p class="text-base-content/50">
+                                <i class="fas fa-calendar mr-1"></i> Tahun <span id="res-tahun">—</span>
+                            </p>
+                        </div>
 
-                    <div class="divider"></div>
+                        <div class="divider"></div>
 
-                    <!-- Prediksi Angka -->
-                    <div class="text-center mb-4">
-                        <p class="text-sm text-base-content/60 mb-1">Prediksi Jumlah Penduduk Miskin</p>
-                        <p class="text-5xl font-extrabold text-primary" id="res-angka">—</p>
-                        <p class="text-sm text-base-content/50 mt-1">ribuan jiwa</p>
-                    </div>
+                        <!-- Prediksi Angka -->
+                        <div class="text-center mb-4">
+                            <p class="text-sm text-base-content/60 mb-1">Prediksi Jumlah Penduduk Miskin</p>
+                            <p class="text-5xl font-extrabold text-primary" id="res-angka">—</p>
+                            <p class="text-sm text-base-content/50 mt-1">ribuan jiwa</p>
+                        </div>
 
-                    <!-- Badge Klasifikasi -->
-                    <div class="text-center mb-4">
-                        <div id="res-badge" class="badge badge-lg text-lg px-6 py-4 font-bold">—</div>
-                    </div>
+                        <!-- Badge Klasifikasi -->
+                        <div class="text-center mb-4">
+                            <div id="res-badge" class="badge badge-lg text-lg px-6 py-4 font-bold">—</div>
+                        </div>
 
-                    <div class="divider"></div>
+                        <div class="divider"></div>
 
-                    <!-- Catatan Indikator Dominan -->
-                    <div class="alert alert-info shadow-lg">
-                        <div>
-                            <i class="fas fa-info-circle text-xl"></i>
-                            <div>
-                                <h4 class="font-bold text-sm">Indikator Dominan</h4>
-                                <p class="text-xs">
-                                    <strong>RLS</strong> (Rata-rata Lama Sekolah) dan <strong>IPM</strong>
-                                    (Indeks Pembangunan Manusia) adalah fitur paling berpengaruh dalam model ini.
-                                </p>
+                        <!-- Catatan Indikator Dominan -->
+                        <div class="alert alert-info shadow-md py-3 px-4 mb-4">
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-info-circle text-lg mt-0.5 text-info"></i>
+                                <div>
+                                    <h4 class="font-bold text-xs">Indikator Dominan</h4>
+                                    <p class="text-[11px] leading-relaxed">
+                                        <strong>RLS</strong> (Rata-rata Lama Sekolah) dan <strong>IPM</strong> (Indeks Pembangunan Manusia) adalah fitur paling berpengaruh dalam model ini.
+                                    </p>
+                                </div>
                             </div>
+                        </div>
+
+                        <!-- Analisis Kontribusi Indikator -->
+                        <div class="alert bg-base-200 border border-base-content/10 shadow-md p-4">
+                            <div class="flex items-start gap-3">
+                                <div class="p-2 bg-secondary/10 rounded-lg text-secondary flex items-center justify-center">
+                                    <i class="fas fa-brain text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-xs text-secondary uppercase tracking-wider mb-1">Analisis Kontribusi Indikator</h4>
+                                    <p class="text-[12px] leading-relaxed text-base-content/85" id="res-penjelasan">
+                                        —
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart Card -->
+                <div id="chart-card" class="card bg-base-100 shadow-2xl border-2 border-base-content/10 transition-all-smooth">
+                    <div class="card-body flex flex-col justify-between">
+                        <div>
+                            <h3 class="card-title text-xl font-bold mb-4 justify-center lg:justify-start">
+                                <i class="fas fa-chart-bar text-secondary mr-2"></i>Perbandingan Indikator
+                            </h3>
+                            <p class="text-xs text-base-content/60 mb-6 text-center lg:text-left">
+                                Membandingkan nilai indikator wilayah pilihan Anda terhadap rata-rata regional Jawa Barat pada tahun tersebut.
+                            </p>
+                        </div>
+                        <div class="relative w-full flex-grow min-h-[300px] h-[300px]">
+                            <canvas id="comparisonChart"></canvas>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-base-content/10 flex flex-wrap gap-x-4 gap-y-2 justify-center lg:justify-start text-[11px] text-base-content/50">
+                            <span><i class="fas fa-square text-[#3b82f6] mr-1"></i> Input Wilayah</span>
+                            <span><i class="fas fa-square text-[#94a3b8] mr-1"></i> Rata-rata Jabar</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Error Alert -->
-            <div id="error-alert" class="alert alert-error shadow-lg mt-4" style="display: none;">
-                <div>
+            <div id="error-alert" class="alert alert-error shadow-lg mt-8" style="display: none;">
+                <div class="flex items-center gap-2">
                     <i class="fas fa-exclamation-triangle"></i>
                     <span id="error-message">Terjadi kesalahan saat melakukan prediksi.</span>
                 </div>
@@ -400,6 +437,8 @@
         });
 
         // TAMPILKAN HASIL
+        let chartInstance = null;
+
         function showResult(data) {
             const resultSection = document.getElementById('result-section');
             resultSection.style.display = 'block';
@@ -434,6 +473,137 @@
                 badge.classList.add('badge-error');
                 card.classList.add('result-glow-tinggi');
             }
+
+            // Tampilkan penjelasan model
+            document.getElementById('res-penjelasan').innerHTML = data.penjelasan_model;
+
+            // Tampilkan/update chart perbandingan
+            updateChart(data);
+        }
+
+        // FUNGSI UPDATE CHART
+        function updateChart(data) {
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            
+            // Hancurkan chart lama jika ada untuk mencegah canvas tumpang tindih
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            const inputVals = [
+                data.input_data.ipm,
+                data.input_data.rls,
+                data.input_data.tpt,
+                data.input_data.pdrb
+            ];
+
+            const avgVals = [
+                data.regional_average.ipm,
+                data.regional_average.rls,
+                data.regional_average.tpt,
+                data.regional_average.pdrb
+            ];
+
+            const labels = ['IPM', 'RLS (Tahun)', 'TPT (%)', 'LPE PDRB (%)'];
+
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: `Input ${data.wilayah}`,
+                            data: inputVals,
+                            backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                            borderColor: '#3b82f6',
+                            borderWidth: 1.5,
+                            borderRadius: 6,
+                            borderSkipped: false
+                        },
+                        {
+                            label: `Rata-rata Jabar (${data.tahun})`,
+                            data: avgVals,
+                            backgroundColor: 'rgba(148, 163, 184, 0.3)',
+                            borderColor: '#94a3b8',
+                            borderWidth: 1.5,
+                            borderRadius: 6,
+                            borderSkipped: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.08)'
+                            },
+                            ticks: {
+                                color: '#94a3b8',
+                                font: {
+                                    family: "'Inter', sans-serif"
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#94a3b8',
+                                font: {
+                                    family: "'Inter', sans-serif"
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // Legend kustom dibuat secara manual di HTML
+                        },
+                        tooltip: {
+                            backgroundColor: '#1e293b',
+                            titleColor: '#f8fafc',
+                            bodyColor: '#cbd5e1',
+                            borderColor: 'rgba(255, 255, 255, 0.1)',
+                            borderWidth: 1,
+                            padding: 10,
+                            bodyFont: {
+                                family: "'Inter', sans-serif"
+                            },
+                            titleFont: {
+                                family: "'Inter', sans-serif",
+                                weight: 'bold'
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        const val = context.parsed.y;
+                                        if (context.label.includes('IPM')) {
+                                            label += val.toFixed(2);
+                                        } else if (context.label.includes('RLS')) {
+                                            label += val.toFixed(2) + ' Tahun';
+                                        } else if (context.label.includes('TPT')) {
+                                            label += val.toFixed(2) + '%';
+                                        } else if (context.label.includes('PDRB')) {
+                                            label += val.toFixed(2) + '%';
+                                        } else {
+                                            label += val.toFixed(2);
+                                        }
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
         }
 
         // TAMPILKAN ERROR
