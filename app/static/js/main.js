@@ -142,14 +142,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         rekomendasiCard.classList.remove('hidden');
         if (worst.val > 0.05) {
-            document.getElementById('rek-title').textContent = `Prioritas Intervensi: ${worst.key}`;
-            document.getElementById('rek-desc').textContent = `Indikator ${worst.key} di wilayah ini terpaut cukup jauh dari rata-rata Jawa Barat. Rekomendasi kebijakan: ${worst.msg}`;
-            document.getElementById('rek-icon').className = 'fas fa-exclamation-circle text-2xl text-error animate-pulse';
+            document.getElementById('rekomendasi-title').textContent = `Prioritas Intervensi: ${worst.key}`;
+            document.getElementById('rekomendasi-text').textContent = `Indikator ${worst.key} di wilayah ini terpaut cukup jauh dari rata-rata Jawa Barat. Rekomendasi kebijakan: ${worst.msg}`;
+            rekomendasiCard.querySelector('i').className = 'fas fa-exclamation-circle text-2xl text-error animate-pulse mt-1';
             rekomendasiCard.className = 'alert bg-[#1a0040]/80 border border-error/30 shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-all-smooth';
         } else {
-            document.getElementById('rek-title').textContent = 'Kondisi Relatif Stabil';
-            document.getElementById('rek-desc').textContent = 'Seluruh indikator makro berada pada atau lebih baik dari rata-rata Jawa Barat. Pertahankan tren positif ini.';
-            document.getElementById('rek-icon').className = 'fas fa-check-circle text-2xl text-success';
+            document.getElementById('rekomendasi-title').textContent = 'Kondisi Relatif Stabil';
+            document.getElementById('rekomendasi-text').textContent = 'Seluruh indikator makro berada pada atau lebih baik dari rata-rata Jawa Barat. Pertahankan tren positif ini.';
+            rekomendasiCard.querySelector('i').className = 'fas fa-check-circle text-2xl text-success mt-1';
             rekomendasiCard.className = 'alert bg-[#1a0040]/80 border border-success/30 shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all-smooth';
         }
     }
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function loadHistory() {
-        const historyTable = document.getElementById('history-table');
+        const historyTable = document.getElementById('history-tbody');
         if (!historyTable) return;
         
         let history = JSON.parse(localStorage.getItem('jabarPredictHistory') || '[]');
