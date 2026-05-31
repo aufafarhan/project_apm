@@ -1,0 +1,193 @@
+<!-- BERANDA -->
+<section id="beranda" class="min-h-[85vh] flex items-center bg-transparent scroll-mt-20 pt-12 pb-16" data-aos="fade-up">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- Left Column: Text & CTA -->
+                <div class="flex-1 text-center lg:text-left">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white">
+                        Prediksi Jumlah <br class="hidden lg:block">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">Penduduk Miskin</span><br>
+                        di <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Jawa Barat</span>
+                    </h1>
+                    <p class="text-lg text-white/70 mb-8 max-w-2xl mx-auto lg:mx-0">
+                        Aplikasi interaktif berbasis Machine Learning untuk memprediksi tingkat kemiskinan di 27 Kabupaten/Kota Provinsi Jawa Barat menggunakan indikator makro pembangunan ekonomi.
+                    </p>
+                    
+                    <!-- Quick Stats Badges -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
+                        <div class="badge bg-white/5 border-white/10 text-white gap-2 py-4 px-4 shadow-lg backdrop-blur-md">
+                            <i class="fas fa-map-marker-alt text-[#ff6fd8]"></i> 27 Kab/Kota
+                        </div>
+                        <div class="badge bg-white/5 border-white/10 text-white gap-2 py-4 px-4 shadow-lg backdrop-blur-md">
+                            <i class="fas fa-calendar-alt text-[#00d2ff]"></i> Data 2018–2024
+                        </div>
+                        <div class="badge bg-white/5 border-white/10 text-white gap-2 py-4 px-4 shadow-lg backdrop-blur-md">
+                            <i class="fas fa-bullseye text-[#a855f7]"></i> R² Score 81.61%
+                        </div>
+                        <div class="badge bg-white/5 border-white/10 text-white gap-2 py-4 px-4 shadow-lg backdrop-blur-md">
+                            <i class="fas fa-brain text-[#f5af19]"></i> Random Forest Regressor
+                        </div>
+                    </div>
+                    
+                    <!-- Buttons -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                        <a href="#prediksi" class="btn glass-btn-primary btn-lg px-8">
+                            <i class="fas fa-calculator mr-2"></i> Mulai Prediksi
+                        </a>
+                        <a href="#dashboard" class="btn btn-outline border-white/30 text-white hover:bg-white/20 hover:border-white/50 btn-lg px-8 backdrop-blur-sm transition-all-smooth">
+                            <i class="fas fa-chart-pie mr-2"></i> Lihat Dashboard
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Preview Card -->
+                <div class="flex-1 w-full max-w-md mx-auto lg:max-w-none lg:pl-10 relative" data-aos="zoom-in" data-aos-delay="200">
+                    <!-- Decorative glow behind card -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-pink-500/20 to-cyan-500/20 blur-3xl rounded-full transform -translate-y-4"></div>
+                    
+                    <div class="card glass-card shadow-2xl border border-white/20 relative z-10 overflow-hidden result-glow-tinggi">
+                        <div class="card-body p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-white"><i class="fas fa-map-marker-alt text-primary mr-2"></i>Bogor</h3>
+                                    <p class="text-xs text-white/50">Prediksi 2024 (Contoh)</p>
+                                </div>
+                                <div class="badge bg-red-500/20 text-red-300 border-red-500/30 font-bold px-3 py-3 shadow-[0_0_10px_rgba(239,68,68,0.2)]">Tinggi</div>
+                            </div>
+                            
+                            <div class="text-center py-4">
+                                <p class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">412.70</p>
+                                <p class="text-xs text-white/50 mt-1">ribu jiwa penduduk miskin</p>
+                            </div>
+                            
+                            <div class="divider border-white/10 my-2"></div>
+                            
+                            <div class="space-y-4 mt-2">
+                                <div>
+                                    <div class="flex justify-between text-xs text-white/70 mb-1.5">
+                                        <span>Indeks Pembangunan Manusia (IPM)</span>
+                                        <span class="font-bold text-info">72.5</span>
+                                    </div>
+                                    <progress class="progress progress-info w-full bg-white/10 h-2" value="72.5" max="100"></progress>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs text-white/70 mb-1.5">
+                                        <span>Rata-rata Lama Sekolah (RLS)</span>
+                                        <span class="font-bold text-success">8.5 thn</span>
+                                    </div>
+                                    <progress class="progress progress-success w-full bg-white/10 h-2" value="8.5" max="15"></progress>
+                                </div>
+                                <div class="flex justify-between gap-4 mt-4 pt-2">
+                                    <div class="bg-white/5 rounded-xl p-3 flex-1 text-center border border-white/10 shadow-inner">
+                                        <p class="text-[10px] text-white/50 uppercase tracking-wider mb-1">TPT</p>
+                                        <p class="text-sm font-bold text-warning">8.2%</p>
+                                    </div>
+                                    <div class="bg-white/5 rounded-xl p-3 flex-1 text-center border border-white/10 shadow-inner">
+                                        <p class="text-[10px] text-white/50 uppercase tracking-wider mb-1">PDRB</p>
+                                        <p class="text-sm font-bold text-[#ff6fd8]">5.04%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-shimmer" aria-hidden="true"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARA KERJA -->
+    <section class="py-16 bg-transparent relative" data-aos="fade-up" data-aos-delay="150">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">
+                <i class="fas fa-cogs text-primary mr-2"></i>Cara Kerja
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 relative">
+                <!-- Decorative connecting line for desktop -->
+                <div class="hidden md:block absolute top-[40px] left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-transparent via-white/20 to-transparent z-0"></div>
+                
+                <!-- Step 1 -->
+                <div class="card glass-card shadow-xl hover:-translate-y-2 transition-all-smooth relative z-10 border-white/10">
+                    <div class="card-body items-center text-center p-6">
+                        <div class="w-16 h-16 rounded-full bg-primary/20 text-primary flex items-center justify-center text-2xl font-bold mb-5 border border-primary/30 shadow-[0_0_15px_rgba(255,111,216,0.3)] backdrop-blur-md">
+                            1
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Masukkan Data Wilayah</h3>
+                        <p class="text-sm text-white/60">Pilih kabupaten/kota, tahun target, dan masukkan nilai 4 indikator makro ekonomi.</p>
+                    </div>
+                    <div class="glass-shimmer" aria-hidden="true"></div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="card glass-card shadow-xl hover:-translate-y-2 transition-all-smooth relative z-10 border-white/10">
+                    <div class="card-body items-center text-center p-6">
+                        <div class="w-16 h-16 rounded-full bg-[#00d2ff]/20 text-[#00d2ff] flex items-center justify-center text-2xl font-bold mb-5 border border-[#00d2ff]/30 shadow-[0_0_15px_rgba(0,210,255,0.3)] backdrop-blur-md">
+                            2
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Model Memproses Data</h3>
+                        <p class="text-sm text-white/60">Algoritma Random Forest Regressor menganalisis pola data dan melakukan perhitungan akurat.</p>
+                    </div>
+                    <div class="glass-shimmer" aria-hidden="true"></div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="card glass-card shadow-xl hover:-translate-y-2 transition-all-smooth relative z-10 border-white/10">
+                    <div class="card-body items-center text-center p-6">
+                        <div class="w-16 h-16 rounded-full bg-success/20 text-success flex items-center justify-center text-2xl font-bold mb-5 border border-success/30 shadow-[0_0_15px_rgba(34,197,94,0.3)] backdrop-blur-md">
+                            3
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Hasil & Interpretasi</h3>
+                        <p class="text-sm text-white/60">Lihat angka prediksi kemiskinan lengkap dengan kategori, penjelasan ringkas, dan visual grafik.</p>
+                    </div>
+                    <div class="glass-shimmer" aria-hidden="true"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- INDIKATOR INFO CARDS -->
+<section class="py-12 bg-transparent" data-aos="fade-up" data-aos-delay="100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center mb-8 text-white">
+                <i class="fas fa-chart-bar text-primary mr-2"></i>Indikator yang Digunakan
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- IPM -->
+                <div class="card glass-card hover:-translate-y-1 transition-all-smooth duration-300" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card-body items-center text-center relative z-10">
+                        <div class="text-3xl text-[#00d2ff] mb-2"><i class="fas fa-graduation-cap"></i></div>
+                        <h3 class="card-title text-sm font-semibold text-white">IPM</h3>
+                        <p class="text-xs text-white/60">Indeks Pembangunan Manusia</p>
+                    </div>
+                    <div class="glass-shimmer" aria-hidden="true"></div>
+                </div>
+                <!-- RLS -->
+                <div class="card glass-card hover:-translate-y-1 transition-all-smooth duration-300" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card-body items-center text-center relative z-10">
+                        <div class="text-3xl text-[#a855f7] mb-2"><i class="fas fa-book-open"></i></div>
+                        <h3 class="card-title text-sm font-semibold text-white">RLS</h3>
+                        <p class="text-xs text-white/60">Rata-rata Lama Sekolah</p>
+                    </div>
+                    <div class="glass-shimmer" aria-hidden="true"></div>
+                </div>
+                <!-- TPT -->
+                <div class="card glass-card hover:-translate-y-1 transition-all-smooth duration-300" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="card-body items-center text-center relative z-10">
+                        <div class="text-3xl text-[#f5af19] mb-2"><i class="fas fa-briefcase"></i></div>
+                        <h3 class="card-title text-sm font-semibold text-white">TPT</h3>
+                        <p class="text-xs text-white/60">Tingkat Pengangguran Terbuka</p>
+                    </div>
+                    <div class="glass-shimmer" aria-hidden="true"></div>
+                </div>
+                <!-- PDRB -->
+                <div class="card glass-card hover:-translate-y-1 transition-all-smooth duration-300" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="card-body items-center text-center relative z-10">
+                        <div class="text-3xl text-[#ff6fd8] mb-2"><i class="fas fa-coins"></i></div>
+                        <h3 class="card-title text-sm font-semibold text-white">PDRB</h3>
+                        <p class="text-xs text-white/60">Laju Pertumbuhan Ekonomi</p>
+                    </div>
+                    <div class="glass-shimmer" aria-hidden="true"></div>
+                </div>
+            </div>
+        </div>
+    </section>

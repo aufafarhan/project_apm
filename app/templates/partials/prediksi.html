@@ -1,0 +1,132 @@
+<!-- FORM PREDIKSI -->
+<section id="prediksi" class="py-16 bg-transparent scroll-mt-20" data-aos="fade-up">
+        <div class="container mx-auto px-4 max-w-2xl">
+            <h2 class="text-3xl font-bold text-center mb-2 text-white">
+                <i class="fas fa-calculator text-primary mr-2"></i>Form Prediksi
+            </h2>
+            <p class="text-center text-white/60 mb-8">
+                Masukkan data indikator makro untuk mendapatkan prediksi jumlah penduduk miskin.
+            </p>
+
+            <div class="card glass-card shadow-2xl">
+                <div class="card-body relative z-10">
+                    <form id="predict-form" class="space-y-5">
+
+                        <!-- Wilayah -->
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text font-semibold text-white/80">
+                                    <i class="fas fa-map-marker-alt text-primary mr-1"></i> Wilayah
+                                </span>
+                            </label>
+                            <select id="wilayah" class="select select-bordered glass-select w-full" required>
+                                <option value="" disabled selected>Pilih Kabupaten/Kota</option>
+                                <option value="Bandung">Bandung</option>
+                                <option value="Bandung Barat">Bandung Barat</option>
+                                <option value="Bekasi">Bekasi</option>
+                                <option value="Bogor">Bogor</option>
+                                <option value="Ciamis">Ciamis</option>
+                                <option value="Cianjur">Cianjur</option>
+                                <option value="Cirebon">Cirebon</option>
+                                <option value="Garut">Garut</option>
+                                <option value="Indramayu">Indramayu</option>
+                                <option value="Karawang">Karawang</option>
+                                <option value="Kota Bandung">Kota Bandung</option>
+                                <option value="Kota Banjar">Kota Banjar</option>
+                                <option value="Kota Bekasi">Kota Bekasi</option>
+                                <option value="Kota Bogor">Kota Bogor</option>
+                                <option value="Kota Cimahi">Kota Cimahi</option>
+                                <option value="Kota Cirebon">Kota Cirebon</option>
+                                <option value="Kota Depok">Kota Depok</option>
+                                <option value="Kota Sukabumi">Kota Sukabumi</option>
+                                <option value="Kota Tasikmalaya">Kota Tasikmalaya</option>
+                                <option value="Kuningan">Kuningan</option>
+                                <option value="Majalengka">Majalengka</option>
+                                <option value="Pangandaran">Pangandaran</option>
+                                <option value="Purwakarta">Purwakarta</option>
+                                <option value="Subang">Subang</option>
+                                <option value="Sukabumi">Sukabumi</option>
+                                <option value="Sumedang">Sumedang</option>
+                                <option value="Tasikmalaya">Tasikmalaya</option>
+                            </select>
+                        </div>
+
+                        <!-- Tahun -->
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text font-semibold text-white/80">
+                                    <i class="fas fa-calendar-alt text-primary mr-1"></i> Tahun
+                                </span>
+                            </label>
+                            <input type="number" id="tahun" class="input input-bordered glass-input w-full"
+                                   placeholder="Contoh: 2024" min="2018" max="2035" step="1" required>
+                        </div>
+
+                        <!-- IPM & RLS -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text font-semibold text-white/80">
+                                        <i class="fas fa-graduation-cap text-info mr-1"></i> IPM
+                                    </span>
+                                    <span class="label-text-alt text-white/40">Indeks Pembangunan Manusia</span>
+                                </label>
+                                <input type="number" id="ipm" class="input input-bordered glass-input w-full"
+                                       placeholder="Contoh: 72.5" min="0" max="100" step="0.01" required>
+                            </div>
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text font-semibold text-white/80">
+                                        <i class="fas fa-book-open text-success mr-1"></i> RLS
+                                    </span>
+                                    <span class="label-text-alt text-white/40">Rata-rata Lama Sekolah (tahun)</span>
+                                </label>
+                                <input type="number" id="rls" class="input input-bordered glass-input w-full"
+                                       placeholder="Contoh: 8.5" min="0" max="30" step="0.01" required>
+                            </div>
+                        </div>
+
+                        <!-- TPT & PDRB -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text font-semibold text-white/80">
+                                        <i class="fas fa-briefcase text-warning mr-1"></i> TPT
+                                    </span>
+                                    <span class="label-text-alt text-white/40">Tingkat Pengangguran (%)</span>
+                                </label>
+                                <input type="number" id="tpt" class="input input-bordered glass-input w-full"
+                                       placeholder="Contoh: 8.2" min="0" max="100" step="0.01" required>
+                            </div>
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text font-semibold text-white/80">
+                                        <i class="fas fa-coins text-error mr-1"></i> PDRB
+                                    </span>
+                                    <span class="label-text-alt text-white/40">Laju Pertumbuhan Ekonomi (%)</span>
+                                </label>
+                                <input type="number" id="pdrb" class="input input-bordered glass-input w-full"
+                                       placeholder="Contoh: 5.04" min="-100" max="100" step="0.01" required>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-control mt-6">
+                            <button type="submit" id="btn-predict" class="btn glass-btn-primary btn-lg w-full">
+                                <i class="fas fa-search mr-2"></i> Prediksi Sekarang
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Error Alert -->
+                    <div id="error-alert" class="alert alert-error shadow-lg mt-6" style="display: none;">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span id="error-message">Terjadi kesalahan saat melakukan prediksi.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-shimmer" aria-hidden="true"></div>
+            </div>
+        </div>
+    </section>

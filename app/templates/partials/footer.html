@@ -1,0 +1,326 @@
+<!-- FOOTER -->
+<footer class="footer footer-center p-8 bg-white/5 border-t border-white/10 text-white/80">
+        <div>
+            <p class="font-bold text-lg text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-cyan-400">
+                JabarPredicts
+            </p>
+            <p class="text-sm text-white/60">
+                Departemen Sistem Informasi — Universitas Andalas<br>
+                Annisa Revalina H. · Reva Hanum S. · Farhan Aufa · Nailah Khaira A.
+            </p>
+            <p class="text-xs text-white/40 mt-2">
+                Model: Random Forest Regressor · R² = 81.61% · Data: BPS 2018–2024
+            </p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Inisialisasi AOS (Animate on Scroll)
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Tampilkan histori pada saat pertama dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHistory();
+        });
+
+        // FORM SUBMIT — POST ke /predict
+        document.getElementById('predict-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('btn-predict');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="loading loading-spinner loading-sm mr-2"></span> Memproses...';
+            btn.disabled = true;
+
+            // Sembunyikan error sebelumnya
+            document.getElementById('error-alert').style.display = 'none';
+
+            const payload = {
+                wilayah: document.getElementById('wilayah').value,
+                tahun:   document.getElementById('tahun').value,
+                ipm:     parseFloat(document.getElementById('ipm').value),
+                tpt:     parseFloat(document.getElementById('tpt').value),
+                pdrb:    parseFloat(document.getElementById('pdrb').value),
+                rls:     parseFloat(document.getElementById('rls').value)
+            };
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showResult(data);
+                } else {
+                    showError(data.error || 'Terjadi kesalahan pada server.');
+                }
+            } catch (err) {
+                showError('Gagal terhubung ke server. Pastikan server berjalan.');
+            }
+
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        });
+
+        let chartInstance = null;
+
+        // TAMPILKAN HASIL DAN UPDATE DASHBOARD
+        function showResult(data) {
+            // Ubah state dashboard
+            document.getElementById('empty-state').style.display = 'none';
+            const populatedState = document.getElementById('populated-state');
+            populatedState.style.display = 'block';
+
+            // Scroll ke dashboard
+            document.getElementById('dashboard-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // 1. Isi Summary Cards
+            document.getElementById('sum-wilayah').textContent = data.wilayah;
+            document.getElementById('sum-tahun').textContent = data.tahun;
+            
+            const numVal = data.prediksi_penduduk_miskin;
+            document.getElementById('sum-angka').textContent = numVal.toLocaleString('id-ID', {
+                minimumFractionDigits: 2, maximumFractionDigits: 2
+            });
+
+            // Badge Kategori
+            const sumBadge = document.getElementById('sum-badge');
+            sumBadge.textContent = data.klasifikasi;
+            sumBadge.className = 'badge badge-lg font-bold px-4 py-4 border-none text-white ';
+            
+            if (data.klasifikasi === 'Rendah') sumBadge.classList.add('bg-green-500/30', 'text-green-300');
+            else if (data.klasifikasi === 'Sedang') sumBadge.classList.add('bg-yellow-500/30', 'text-yellow-300');
+            else sumBadge.classList.add('bg-red-500/30', 'text-red-300');
+
+            // 2. Isi Interpretasi
+            document.getElementById('res-penjelasan').innerHTML = data.penjelasan_model;
+
+            // 3. Kalkulasi Status Indikator
+            calculateStatus(data);
+
+            // 4. Update Chart
+            updateChart(data);
+
+            // 5. Simpan riwayat & render ulang
+            saveToHistory(data);
+            renderHistory();
+        }
+
+        // LOGIKA STATUS INDIKATOR
+        function getStatus(indicator, input, avg) {
+            // Margin 2% dari rata-rata untuk mentoleransi nilai yang mendekati rata-rata
+            const margin = Math.abs(avg * 0.02); 
+            
+            if (indicator === 'TPT') {
+                // TPT lebih tinggi = buruk
+                if (input > avg + margin) return { label: 'Perlu Perhatian', color: 'bg-red-500/20 text-red-400 border-red-500/30' };
+                if (input < avg - margin) return { label: 'Lebih Baik', color: 'bg-green-500/20 text-green-400 border-green-500/30' };
+                return { label: 'Mendekati Rata-rata', color: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' };
+            } else {
+                // IPM, RLS, PDRB lebih rendah = buruk
+                if (input < avg - margin) return { label: 'Perlu Perhatian', color: 'bg-red-500/20 text-red-400 border-red-500/30' };
+                if (input > avg + margin) return { label: 'Lebih Baik', color: 'bg-green-500/20 text-green-400 border-green-500/30' };
+                return { label: 'Mendekati Rata-rata', color: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' };
+            }
+        }
+
+        function calculateStatus(data) {
+            const inputs = data.input_data;
+            const avgs = data.regional_average;
+
+            const indicators = [
+                { id: 'ipm', name: 'IPM', inp: inputs.ipm, avg: avgs.ipm },
+                { id: 'rls', name: 'RLS', inp: inputs.rls, avg: avgs.rls },
+                { id: 'tpt', name: 'TPT', inp: inputs.tpt, avg: avgs.tpt },
+                { id: 'pdrb', name: 'PDRB', inp: inputs.pdrb, avg: avgs.pdrb }
+            ];
+
+            let worstIndicator = null;
+            let worstGap = -Infinity; // Mencari persentase gap terburuk
+
+            indicators.forEach(ind => {
+                document.getElementById(`stat-${ind.id}-val`).textContent = ind.inp.toFixed(2) + (ind.name==='TPT'||ind.name==='PDRB'?'%':'');
+                document.getElementById(`stat-${ind.id}-avg`).textContent = ind.avg.toFixed(2) + (ind.name==='TPT'||ind.name==='PDRB'?'%':'');
+                
+                const status = getStatus(ind.name, ind.inp, ind.avg);
+                const badge = document.getElementById(`stat-${ind.id}-badge`);
+                badge.textContent = status.label;
+                badge.className = `badge badge-sm py-3 px-2 font-bold w-full border text-[10px] sm:text-xs ${status.color}`;
+
+                // Calculate relative gap to find the worst indicator for recommendation
+                let gapPercent = 0;
+                if (ind.name === 'TPT') {
+                    gapPercent = (ind.inp - ind.avg) / ind.avg; // TPT tinggi = positif secara numerik perhitungan gap
+                } else {
+                    gapPercent = (ind.avg - ind.inp) / ind.avg; // IPM rendah = positif secara numerik perhitungan gap
+                }
+
+                if (status.label === 'Perlu Perhatian' && gapPercent > worstGap) {
+                    worstGap = gapPercent;
+                    worstIndicator = ind;
+                }
+            });
+
+            // Tampilkan Rekomendasi
+            const recCard = document.getElementById('rekomendasi-card');
+            const recText = document.getElementById('rekomendasi-text');
+            const recTitle = document.getElementById('rekomendasi-title');
+            const recIcon = recCard.querySelector('i');
+            
+            recCard.classList.remove('hidden');
+
+            if (worstIndicator) {
+                // Ada masalah
+                recCard.className = 'alert bg-[#1a0040]/80 border border-[#ff6fd8]/30 shadow-lg transition-all-smooth';
+                recIcon.className = 'fas fa-lightbulb text-[#ff6fd8] text-xl mt-1 animate-pulse';
+                recTitle.className = 'font-bold text-sm text-[#ff6fd8] mb-1';
+                recTitle.textContent = 'Rekomendasi Prioritas';
+                
+                if (worstIndicator.name === 'TPT') {
+                    recText.innerHTML = `Tingkat Pengangguran Terbuka (TPT) berada <strong>di atas rata-rata regional</strong>. Sangat disarankan untuk memprioritaskan kebijakan pembukaan lapangan kerja baru, program padat karya, serta pelatihan vokasi guna menekan angka kemiskinan.`;
+                } else if (worstIndicator.name === 'IPM') {
+                    recText.innerHTML = `Indeks Pembangunan Manusia (IPM) masih <strong>tertinggal dari rata-rata provinsi</strong>. Prioritaskan alokasi anggaran daerah pada peningkatan kualitas dan aksesibilitas sektor pendidikan dan kesehatan dasar.`;
+                } else if (worstIndicator.name === 'RLS') {
+                    recText.innerHTML = `Rata-rata Lama Sekolah (RLS) tergolong <strong>rendah</strong>. Program wajib belajar, kejar paket, dan pemberian beasiswa daerah sangat direkomendasikan untuk meningkatkan kualitas SDM secara berkelanjutan.`;
+                } else if (worstIndicator.name === 'PDRB') {
+                    recText.innerHTML = `Laju Pertumbuhan Ekonomi (PDRB) melambat <strong>di bawah rata-rata Jawa Barat</strong>. Pemerintah daerah perlu mempertimbangkan pemberian insentif bagi UMKM lokal dan mengamankan investasi untuk menstimulasi perekonomian wilayah.`;
+                }
+            } else {
+                // Semua baik
+                recCard.className = 'alert bg-[#0a1f10]/80 border border-green-500/30 shadow-lg transition-all-smooth';
+                recIcon.className = 'fas fa-check-circle text-green-400 text-xl mt-1';
+                recTitle.className = 'font-bold text-sm text-green-400 mb-1';
+                recTitle.textContent = 'Kondisi Stabil';
+                recText.innerHTML = `Luar Biasa! Semua indikator makro terpantau <strong>lebih baik atau mendekati rata-rata provinsi</strong>. Langkah terbaik saat ini adalah mempertahankan stabilitas kebijakan ekonomi dan melanjutkan program yang sedang berjalan.`;
+            }
+        }
+
+        // HISTORY MANAGEMENT
+        function saveToHistory(data) {
+            let history = JSON.parse(localStorage.getItem('jabarPredictsHistory')) || [];
+            
+            const now = new Date();
+            const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')} (${now.getDate()}/${now.getMonth()+1})`;
+
+            const record = {
+                waktu: timeStr,
+                wilayah: data.wilayah,
+                tahun: data.tahun,
+                prediksi: data.prediksi_penduduk_miskin,
+                klasifikasi: data.klasifikasi
+            };
+
+            history.unshift(record); // Masukkan ke depan
+            if (history.length > 5) history.pop(); // Batasi max 5
+
+            localStorage.setItem('jabarPredictsHistory', JSON.stringify(history));
+        }
+
+        function renderHistory() {
+            const history = JSON.parse(localStorage.getItem('jabarPredictsHistory')) || [];
+            const tbody = document.getElementById('history-tbody');
+            const emptyMsg = document.getElementById('history-empty');
+
+            tbody.innerHTML = '';
+
+            if (history.length === 0) {
+                emptyMsg.style.display = 'block';
+                return;
+            }
+
+            emptyMsg.style.display = 'none';
+
+            history.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-white/5 hover:bg-white/5 transition-colors';
+                
+                let badgeClass = 'bg-white/10 text-white/80';
+                if (item.klasifikasi === 'Rendah') badgeClass = 'bg-green-500/20 text-green-400 border-green-500/30';
+                else if (item.klasifikasi === 'Sedang') badgeClass = 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
+                else if (item.klasifikasi === 'Tinggi') badgeClass = 'bg-red-500/20 text-red-400 border-red-500/30';
+
+                tr.innerHTML = `
+                    <td class="text-white/50 px-4">${item.waktu}</td>
+                    <td class="font-semibold text-white px-4">${item.wilayah}</td>
+                    <td class="text-center px-4">${item.tahun}</td>
+                    <td class="text-right font-mono text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400 font-bold px-4">${item.prediksi.toLocaleString('id-ID', {minimumFractionDigits:2, maximumFractionDigits:2})}</td>
+                    <td class="text-center px-4"><span class="badge badge-sm border ${badgeClass} font-semibold py-2.5">${item.klasifikasi}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // FUNGSI UPDATE CHART
+        function updateChart(data) {
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            const inputVals = [data.input_data.ipm, data.input_data.rls, data.input_data.tpt, data.input_data.pdrb];
+            const avgVals = [data.regional_average.ipm, data.regional_average.rls, data.regional_average.tpt, data.regional_average.pdrb];
+            const labels = ['IPM', 'RLS (Thn)', 'TPT (%)', 'PDRB (%)'];
+
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: `Input ${data.wilayah}`,
+                            data: inputVals,
+                            backgroundColor: 'rgba(0, 210, 255, 0.7)',
+                            borderColor: '#00d2ff',
+                            borderWidth: 1.5,
+                            borderRadius: 6,
+                            borderSkipped: false
+                        },
+                        {
+                            label: `Rata-rata Jabar`,
+                            data: avgVals,
+                            backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                            borderColor: 'rgba(255, 255, 255, 0.4)',
+                            borderWidth: 1.5,
+                            borderRadius: 6,
+                            borderSkipped: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8' } },
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1a0040',
+                            titleColor: '#f8fafc',
+                            bodyColor: '#cbd5e1',
+                            borderColor: 'rgba(255, 255, 255, 0.15)',
+                            borderWidth: 1,
+                            padding: 10
+                        }
+                    }
+                }
+            });
+        }
+
+        // TAMPILKAN ERROR
+        function showError(message) {
+            document.getElementById('error-alert').style.display = 'flex';
+            document.getElementById('error-message').textContent = message;
+        }
+    </script>

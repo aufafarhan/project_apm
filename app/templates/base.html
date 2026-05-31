@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="night">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JabarPredicts - Prediksi Penduduk Miskin Jawa Barat</title>
+    <meta name="description" content="JabarPredicts - Aplikasi Prediksi Jumlah Penduduk Miskin Kabupaten/Kota di Provinsi Jawa Barat menggunakan Machine Learning (Random Forest Regressor)">
+
+    <!-- Tailwind CSS + DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.min.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- AOS.js -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+</head>
+<body class="min-h-screen">
+
+    <div class="liquid-stage" aria-hidden="true">
+        <div class="blob blob--1"></div>
+        <div class="blob blob--2"></div>
+        <div class="blob blob--3"></div>
+        <div class="blob blob--4"></div>
+    </div>
+    {% block content %}{% endblock %}
+
+    <!-- Custom Logic -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
